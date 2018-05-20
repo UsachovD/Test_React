@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="css/main.css">
+    <title>Hello World</title>
+    <script src="js/react.js"></script>
+    <script src="js/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js">
+    </script>
+  </head>
+  <body>
+    <div id="program"></div>
+    <script type="text/babel">
+    const app = document.getElementById("program");
+    class Task extends React.Component {
+      constructor(props){
+        super(props);
+        this.state = {edit:false};
+      };
+      save = () => {this.setState({edit:false});};
+      edit = () => {this.setState({edit:true});};
+      remove = () => {alert ("Нажата кнопка удалить");};
+      rendNorm =() => {
+          return (
+          <div className="box">
+          <textarea defaultValue = {this.props.children}></textarea>
+          <button onClick={this.edit} className="btn light">Редактировать</button>
+          <button onClick={this.remove} className="btn red">Удалить</button>
+          </div>
+    );};
+    rendEdit =() => {
+        return (
+        <div className="box">
+        <textarea defaultValue = {this.props.children}></textarea>
+        <button onClick={this.save} className="btn success">Сохранить</button>
+        </div>
+  );};
+      render() {
+        if(this.state.edit){
+          return this.rendEdit();
+        } else {
+          return this.rendNorm();
+        }
+  }
+}
+
+    ReactDOM.render (
+      <div className="field">
+        <Task>Hey, it is me!</Task>
+        <Task>Task number 2</Task>
+        <Task>Hello World!</Task>
+      </div>, app);
+  </script>﻿
+
+
+  </body>
+</html>
