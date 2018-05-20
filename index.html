@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="css/main.css">
     <title>Hello World</title>
+    <script src="js/DataBase.js"></script>
     <script src="js/react.js"></script>
     <script src="js/react-dom.js"></script>
     <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js">
@@ -13,43 +14,42 @@
     <div id="program"></div>
     <script type="text/babel">
     const app = document.getElementById("program");
-    class Task extends React.Component {
-      constructor(props){
+    class ContactList extends React.Component{
+      constructor(props) {
         super(props);
-        this.state = {edit:false};
-      };
-      save = () => {this.setState({edit:false});};
-      edit = () => {this.setState({edit:true});};
-      remove = () => {alert ("Нажата кнопка удалить");};
-      rendNorm =() => {
-          return (
-          <div className="box">
-          <textarea defaultValue = {this.props.children}></textarea>
-          <button onClick={this.edit} className="btn light">Редактировать</button>
-          <button onClick={this.remove} className="btn red">Удалить</button>
-          </div>
-    );};
-    rendEdit =() => {
+      }
+      render(){
         return (
-        <div className="box">
-        <textarea defaultValue = {this.props.children}></textarea>
-        <button onClick={this.save} className="btn success">Сохранить</button>
-        </div>
-  );};
-      render() {
-        if(this.state.edit){
-          return this.rendEdit();
-        } else {
-          return this.rendNorm();
-        }
-  }
-}
-
+          <div className="contacts">
+            <ul className="contacts-list">
+              {
+                DataBase.map(function(el){
+                  return <Contact
+                      key={el.id}
+                      name={el.name}
+                      surname={el.surname}
+                  />;
+                })
+              }
+            </ul>
+          </div>
+        )
+      };
+    };
+    class Contact extends React.Component{
+      constructor(props) {
+        super(props);
+      }
+      render(){
+        return <li className="contact">
+                  <div className="contact-name">{this.props.name}</div>
+                  <div className="contact-surname">{this.props.surname}</div>
+              </li>;
+      };
+    }
     ReactDOM.render (
-      <div className="field">
-        <Task>1</Task>
-        <Task>Task number 2</Task>
-        <Task>Hello World!</Task>
+      <div>        
+        <h1><ContactList/></h1>
       </div>, app);
   </script>﻿
 
