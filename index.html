@@ -21,6 +21,7 @@
       render(){
         return (
           <div className="contacts">
+          <input type="text" className="search"/>
             <ul className="contacts-list">
               {
                 DataBase.map(function(el){
@@ -42,13 +43,13 @@
       }
       render(){
         return <li className="contact">
-                  <div className="contact-name">{this.props.name}</div>
+                  <div className="contact-name">{this.props.name}</div>                                  
                   <div className="contact-surname">{this.props.surname}</div>
               </li>;
       };
     }
     ReactDOM.render (
-      <div>        
+      <div>
         <h1><ContactList/></h1>
       </div>, app);
   </script>﻿
