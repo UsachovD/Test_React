@@ -46,6 +46,7 @@
                 })
               }
             </ul>
+          <input type="button" className="search" onClick="addContact" value="Add Contact"/>
           </div>
         )
       };
@@ -56,8 +57,7 @@
       }
       render(){
         return <li className="contact">
-                  <div className="contact-name">{this.props.name}</div>
-                  <div className="contact-surname">{this.props.surname}</div>
+                  <div className="contact-name">{this.props.name}{this.props.surname}</div>
               </li>;
       };
     }
